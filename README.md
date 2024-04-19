@@ -13,9 +13,10 @@ dotnet run
 
 ## Testimine
 
-Projekt sisaldab ka ühikuteste, mis on loodud XUnit abil. Teste saab käivitada järgmise käsu abil:
+Projekt sisaldab ka ühikuteste, mis on loodud XUnit abil. Teste saab käivitada järgmise käsu abil kui olete projekti juurkaustas:
 
 ```sh
+cd Tests
 dotnet test
 ```
 
