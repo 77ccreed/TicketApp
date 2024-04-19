@@ -10,19 +10,29 @@
     <p><a href="/CreateTicket">Create a new ticket</a></p>
 </div>
 
-@foreach (var ticket in Model.Tickets)
-{
-    if (ticket != null)
-    {
-        <div class="@(ticket.IsDeadlineApproachingOrPassed() ? "deadline-alert" : "")">
-            <h2>@ticket.Description</h2>
-            <p>Submitted at: @ticket.SubmissionTime</p>
-            <p>Resolution deadline: @ticket.ResolutionDeadline</p>
-
-            <form method="post">
-                <input type="hidden" asp-for="@Model.Id" value="@ticket.Id" />
-                <input type="submit" value="Resolve" asp-page-handler="Resolve" />
-            </form>
-        </div>
-    }
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Submitted At</th>
+            <th>Deadline</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model.Tickets)
+        {
+            <tr class="@(ticket.IsDeadlineApproachingOrPassed() ? "table-danger" : "")">
+                <td>@ticket.Description</td>
+                <td>@ticket.SubmissionTime.ToString("g")</td>
+                <td>@ticket.ResolutionDeadline.ToString("g")</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" asp-for="@Model.Id" value="@ticket.Id" />
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Resolve">Resolve</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
