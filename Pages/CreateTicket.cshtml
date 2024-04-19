@@ -1,0 +1,17 @@
+@page
+@model CreateTicketModel
+@{
+  ViewData["Title"] = "Create Ticket";
+}
+<h2>Create Ticket</h2>
+<form method="post">
+  <label asp-for="Ticket.Description">Description</label>
+  <input asp-for="Ticket.Description" />
+  <span asp-validation-for="Ticket.Description"></span>
+
+  <label asp-for="Ticket.ResolutionDeadline">Resolution deadline</label>
+  <input asp-for="Ticket.ResolutionDeadline" type="datetime-local" />
+  <span asp-validation-for="Ticket.ResolutionDeadline"></span>
+
+  <button type="submit">Create</button>
+</form>

@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p><a href="/CreateTicket">Create a new ticket</a></p>
+</div>
+
+@foreach (var ticket in Model.Tickets)
+{
+    if (ticket != null)
+    {
+        <div class="@(ticket.IsDeadlineApproachingOrPassed() ? "deadline-alert" : "")">
+            <h2>@ticket.Description</h2>
+            <p>Submitted at: @ticket.SubmissionTime</p>
+            <p>Resolution deadline: @ticket.ResolutionDeadline</p>
+
+            <form method="post">
+                <input type="hidden" asp-for="@Model.Id" value="@ticket.Id" />
+                <input type="submit" value="Resolve" asp-page-handler="Resolve" />
+            </form>
+        </div>
+    }
+}
