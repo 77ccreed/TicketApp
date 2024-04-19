@@ -24,8 +24,8 @@ public class CreateTicketModel : PageModel
             return Page();
         }
 
-        // Use the global variable for the new ticket ID
-        Ticket.Id = NextTicketId++;
+        // Use Interlocked.Increment to ensure thread safety
+        Ticket.Id = Interlocked.Increment(ref NextTicketId);
         Ticket.SubmissionTime = DateTime.Now;
 
         if (!Tickets.TryAdd(Ticket.Id, Ticket))
