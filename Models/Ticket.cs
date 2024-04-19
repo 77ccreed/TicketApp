@@ -8,16 +8,21 @@ public class Ticket
   public string Description { get; set; } = string.Empty;
 
   [Required]
-  public DateTime SubmissionTime { get; set; }
+  public DateTimeOffset SubmissionTime { get; set; }
 
   [Required(ErrorMessage = "Resolution deadline is required")]
-  public DateTime ResolutionDeadline { get; set; } = DateTime.Now;
+  public DateTimeOffset ResolutionDeadline { get; set; } = DateTimeOffset.Now;
 
-  public bool Resolved { get; set; } = false;
+  public bool Resolved { get; private set; } = false;
 
-  public bool IsDeadlineApproachingOrPassed()
+  public void Resolve()
   {
-    var timeRemaining = ResolutionDeadline - DateTime.Now;
-    return timeRemaining.TotalHours <= 1;
+    Resolved = true;
+  }
+
+  public bool IsDeadlineApproachingOrPassed(int hoursBeforeDeadline = 1)
+  {
+    var timeRemaining = ResolutionDeadline - DateTimeOffset.Now;
+    return timeRemaining.TotalHours <= hoursBeforeDeadline;
   }
 }

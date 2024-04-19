@@ -27,7 +27,7 @@ namespace TicketApp.Pages
         {
             if (CreateTicketModel.Tickets.TryGetValue(id, out Ticket? ticket) && ticket != null) // Mark 'ticket' as nullable
             {
-                ticket.Resolved = true;
+                ticket.Resolve();
                 CreateTicketModel.Tickets[id] = ticket; // Updating dictionary to reflect resolved status
             }
             else
@@ -38,9 +38,5 @@ namespace TicketApp.Pages
 
             return RedirectToPage();
         }
-
-
-
-
     }
 }
