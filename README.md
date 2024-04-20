@@ -17,7 +17,7 @@ Projekt sisaldab ka ühikuteste, mis on loodud XUnit abil. Teste saab käivitada
 
 ```sh
 cd Tests
-dotnet test
+dotnet test TicketApp.Tests.csproj
 ```
 
 ## Struktuur
