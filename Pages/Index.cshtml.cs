@@ -6,29 +6,34 @@ namespace TicketApp.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly ITicketService _ticketService;
 
         public List<Ticket> Tickets { get; private set; } = new List<Ticket>();
         public int Id { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, ITicketService ticketService)
         {
             _logger = logger;
+            _ticketService = ticketService;
         }
 
         public void OnGet()
         {
-            Tickets = CreateTicketModel.Tickets.Values
+            Tickets = _ticketService.GetAllTickets()
                         .Where(t => !t.Resolved)
                         .OrderByDescending(t => t.ResolutionDeadline)
                         .ToList();
+            _logger.LogInformation($"Retrieved {Tickets.Count} unresolved tickets.");
         }
 
         public IActionResult OnPostResolve(int id)
         {
-            if (CreateTicketModel.Tickets.TryGetValue(id, out Ticket? ticket) && ticket != null) // Mark 'ticket' as nullable
+            var allTickets = _ticketService.GetAllTickets();
+            var ticket = allTickets.FirstOrDefault(t => t.Id == id);
+            if (ticket != null)
             {
                 ticket.Resolve();
-                CreateTicketModel.Tickets[id] = ticket; // Updating dictionary to reflect resolved status
+                // No need to update the ticket in the dictionary because it's the same instance
             }
             else
             {

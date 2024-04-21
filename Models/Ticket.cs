@@ -13,11 +13,16 @@ public class Ticket
   [Required(ErrorMessage = "Resolution deadline is required")]
   public DateTimeOffset ResolutionDeadline { get; set; } = DateTimeOffset.Now;
 
-  public bool Resolved { get; private set; } = false;
+  public bool Resolved { get; set; } = false;
 
   public void Resolve()
   {
     Resolved = true;
+  }
+
+  public void Unresolve()
+  {
+    Resolved = false;
   }
 
   public bool IsDeadlineApproachingOrPassed(int hoursBeforeDeadline = 1)

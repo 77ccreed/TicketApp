@@ -1,17 +1,17 @@
-using System.Collections.Concurrent;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class CreateTicketModel : PageModel
 {
+    private readonly ITicketService _ticketService;
+
     [BindProperty]
     public Ticket Ticket { get; set; } = new Ticket();
 
-    public static ConcurrentDictionary<int, Ticket> Tickets = new ConcurrentDictionary<int, Ticket>();
-    public static ConcurrentDictionary<int, Ticket> ResolvedTickets = new ConcurrentDictionary<int, Ticket>();
-
-    // Global variable to hold the next ticket ID
-    private static int NextTicketId = 1;
+    public CreateTicketModel(ITicketService ticketService)
+    {
+        _ticketService = ticketService;
+    }
 
     public void OnGet()
     {
@@ -24,15 +24,7 @@ public class CreateTicketModel : PageModel
             return Page();
         }
 
-        // Use Interlocked.Increment to ensure thread safety
-        Ticket.Id = Interlocked.Increment(ref NextTicketId);
-        Ticket.SubmissionTime = DateTime.Now;
-
-        if (!Tickets.TryAdd(Ticket.Id, Ticket))
-        {
-            ModelState.AddModelError("", "Could not add the ticket due to a concurrency issue.");
-            return Page();
-        }
+        _ticketService.CreateTicket(Ticket);
 
         return RedirectToPage("./Index");
     }
