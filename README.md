@@ -4,10 +4,9 @@ TicketApp on veebirakendus, mis võimaldab kasutajatel hallata kasutajatoele saa
 
 ## Ehitamine ja käivitamine
 
-Projekti ehitamiseks ja käivitamiseks on vaja .NET Core SDK-d. Kui see on installitud, saate projekti ehitada ja käivitada järgmiste käskudega:
+Projekti ehitamiseks ja käivitamiseks on vaja .NET Core SDK-d. Kui see on installitud, saate projekti ehitada ja käivitada järgmise käsu abil kui olete projekti juurkaustas:
 
 ```sh
-dotnet build
 dotnet run
 ```
 
