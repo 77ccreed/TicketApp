@@ -12,7 +12,7 @@ dotnet run
 
 ## Testimine
 
-Projekt sisaldab ka ühikuteste, mis on loodud XUnit abil. Teste saab käivitada järgmise käsu abil kui olete projekti juurkaustas:
+Projekt sisaldab ka ühikuteste, mis on loodud XUnit abil. Testid katavad rakenduse põhifunktsionaalsuse, sealhulgas pöördumise loomise ja lahenemise. Teste saab käivitada järgmise käsu abil kui olete projekti juurkaustas:
 
 ```sh
 cd Tests
@@ -32,7 +32,7 @@ Projekt on struktureeritud järgmiselt:
 
 ## Andmebaas
 
-Rakendus kasutab mälupõhist andmebaasi, mis on konfigureeritud failis `appsettings.json`.
+Rakendus kasutab mälupõhist andmebaasi.
 
 ## Funktsionaalsus
 
