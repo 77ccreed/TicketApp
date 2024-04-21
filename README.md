@@ -27,6 +27,7 @@ Projekt on struktureeritud järgmiselt:
 - `Models/`: Sisaldab rakenduse andmemudeleid.
 - `Pages/`: Sisaldab rakenduse vaateid ja nende taga olevat loogikat.
 - `Properties/`: Sisaldab projekti konfiguratsioonifaile.
+- `Services/`: Sisaldab rakenduse teenuseid.
 - `Tests/`: Sisaldab projekti ühikuteste.
 - `wwwroot/`: Sisaldab staatilisi faile, nagu CSS ja JavaScript.
 
